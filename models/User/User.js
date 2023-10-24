@@ -4,7 +4,10 @@ const bcrypt = require("bcryptjs");
 const { errorMessage } = require("../../utils");
 const { userValidation } = require("../../utils/validation");
 
-const mongoSchema = new mongoose.Schema(
+const { Schema } = mongoose;
+const { String, Boolean } = Schema.Types;
+
+const mongoSchema = new Schema(
   {
     firstName: {
       type: String,
