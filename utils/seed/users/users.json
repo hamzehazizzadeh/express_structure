@@ -1,0 +1,13 @@
+[
+  {
+    "_id": "66090f5e8be57eebc3220562",
+    "firstName": "حمزه",
+    "lastName": "عزیززاده",
+    "userName": "hamzehazizzadeh",
+    "nationalNumber": "1111111111",
+    "phoneNumber": "09121111111",
+    "role": "ADMIN",
+    "isActive": true,
+    "password": "$2a$10$BxCjeEDMJpjf1QeXKebHhOYFkdQQMxJBGfNSF9dsNOBD1IwrfTnUO"
+  }
+]

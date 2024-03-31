@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
 const { errorMessage } = require("../../utils");
-const { userValidation } = require("../../utils/validation");
+const { userValidation } = require("../../utils/validation/validation");
+const { userRoleItems } = require("../../utils/enum");
 
 const { Schema } = mongoose;
 const { String, Boolean } = Schema.Types;
@@ -44,10 +45,10 @@ const mongoSchema = new Schema(
     },
     role: {
       type: String,
-      enum: ["ADMIN", "CITY", "CENTER", "EXPERT"],
+      enum: userRoleItems,
       require: true,
     },
-    isConfirm: {
+    isActive: {
       type: Boolean,
       default: true,
       require: true,

@@ -19,8 +19,8 @@ exports.handleSignIn = async (req, res, next) => {
       errorMessage("نام کاربری یا رمز عبور اشتباه میباشد", 422);
     }
 
-    if (!user.isConfirm) {
-      errorMessage("حساب کاربری شما غیر فعال می باشد", 422);
+    if (!user.isActive) {
+      errorMessage("حساب کاربری شما غیر فعال است", 422);
     }
 
     const token = jwt.sign(

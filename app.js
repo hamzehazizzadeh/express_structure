@@ -4,13 +4,14 @@ const express = require("express");
 const dotEnv = require("dotenv");
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUI = require("swagger-ui-express");
-const fileUpload = require("express-fileupload");
-const cors = require("cors");
 const mongoose = require("mongoose");
 
+const mongoSeeds = require("./utils/seed/mongoSeeds");
+const logger = require("./middlewares/logger");
+const routes = require("./routes");
 const { errorHandler } = require("./middlewares/errors");
-const { authenticated } = require("./middlewares/authorization");
 const { swaggerOptions } = require("./utils");
+const { corsConfigs } = require("./middlewares/corsConfigs");
 
 const app = express();
 
@@ -25,18 +26,23 @@ mongoose.connect(process.env.MONGO_CONNECTION_STRING, {
 
 mongoose.connection.on("connected", () => {
   console.log("MongoDB connected successfully");
+
+  //* Mongo Seeds
+  mongoSeeds();
 });
 
 //* BodyPaser
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cors());
 
-//* File Upload Middleware
-app.use(fileUpload());
+//* CORS
+app.use(corsConfigs);
+
+//* Logs
+app.use(logger);
 
 //* Routes
-app.use("/auth", require("./routes/authRoutes/authRoutes"));
+app.use(routes);
 
 //* Static Folder
 app.use("/public", express.static(path.join(__dirname, "public")));

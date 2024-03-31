@@ -15,7 +15,7 @@ exports.authorization = (req, res, next) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
 
     if (!decodedToken) {
-      const error = new Error("توکن اعتبارسنجی ارسالی نامعتبر می باشد");
+      const error = new Error("توکن اعتبارسنجی ارسالی نامعتبر است");
       error.statusCode = 401;
       throw error;
     }
