@@ -1,32 +1,36 @@
 {
-  "name": "express_structure",
-  "version": "1.1.1",
+  "name": "ecommerce",
+  "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
     "start": "node .",
-    "dev": "nodemon ."
+    "dev": "nodemon .",
+    "migration": "knex migrate:rollback && knex migrate:latest && knex seed:run"
   },
-  "author": "",
+  "author": "Hamzeh Azizzadeh",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "compression": "^1.7.4",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.2",
-    "lodash": "^4.17.21",
     "jalali-moment": "^3.3.11",
-    "mongoose": "^7.6.3",
+    "jsonwebtoken": "^9.0.2",
+    "knex": "^3.1.0",
+    "lodash.isempty": "^4.4.0",
+    "mongoose": "^8.0.3",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
+    "objection": "^3.1.4",
+    "pg": "^8.11.5",
     "rotating-file-stream": "^3.2.1",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
-    "uuid": "^9.0.1",
-    "yup": "^1.3.2"
+    "yup": "^1.3.3"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.2"
   }
 }

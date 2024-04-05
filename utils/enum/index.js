@@ -1,1 +1,1 @@
-exports.userRoleItems = ["ADMIN"];
+exports.userRoleItems = ["ADMIN", "BUYER"];

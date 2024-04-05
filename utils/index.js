@@ -1,3 +1,4 @@
+const jwt = require("jsonwebtoken");
 const moment = require("jalali-moment");
 
 //* Start Math
@@ -35,6 +36,23 @@ exports.resMessage = (res, status, message, result) => {
     result: result,
   });
 };
+
+exports.resMessageWithPagination = (
+  pageNumber,
+  numberOfItem,
+  itemsCount,
+  result
+) => {
+  return {
+    currentPage: pageNumber,
+    allPagesCount: Math.ceil(numberOfItem / itemsCount),
+    nextPage: pageNumber + 1,
+    previousPage: pageNumber - 1,
+    hasNextPage: itemsCount * pageNumber < numberOfItem,
+    hasPreviousPage: pageNumber > 1,
+    ...result,
+  };
+};
 //* End Response Message
 
 //* Start Swagger
@@ -42,18 +60,38 @@ exports.swaggerOptions = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "Express API with Swagger",
-      version: "0.1.0",
+      title: "ECommerce API with Swagger",
+      version: "1.0.0",
       description:
         "This is a CRUD API application made with Express and documented with Swagger",
     },
   },
-  apis: ["./routes/authRoutes/authRoutes.js"],
+  apis: [
+    "./routes/adminRoutes/adminRoutes.js",
+    "./routes/authRoutes/authRoutes.js",
+    "./routes/buyerRoutes/buyerRoutes.js",
+    "./routes/publicRoutes/publicRoutes.js",
+    "./routes/userRoutes/userRoutes.js",
+  ],
 };
 //* End Swagger
 
 //* Start Date
-exports.convertDateFormat = (date, locale = "fa", format = "D MM YYYY") => {
+exports.convertDateFormat = (date, format = "D MM YYYY", locale = "fa") => {
   return moment(date).locale(locale).format(format);
 };
 //* End Date
+
+//* Start Token
+exports.generateToken = (user) => {
+  return jwt.sign(
+    {
+      uid: user._id.toString(),
+    },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: process.env.JWT_EXPIRES_IN,
+    }
+  );
+};
+//* End Token
